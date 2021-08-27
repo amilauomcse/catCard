@@ -1,0 +1,18 @@
+{
+  "name": "CatCard",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@mapbox/blend": "^2.0.1",
+    "axios": "^0.21.1",
+    "fs": "0.0.1-security",
+    "minimist": "^1.2.5",
+    "request": "^2.88.2"
+  }
+}
