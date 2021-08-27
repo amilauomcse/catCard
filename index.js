@@ -3,6 +3,7 @@ const axios = require("axios");
 const blend = require('@mapbox/blend');
 const config = require('./config.js');
 const argv = require('minimist')(process.argv.slice(2));
+require('console-stamp')(console, 'HH:MM:ss.l]');
 const {
     greeting = 'Hello',
     who = 'You',
@@ -51,14 +52,14 @@ const writeFileToLocation = (location, file) => {
             if (fileWriteError) {
                 reject(fileWriteError);
             } else {
-                resolve(`Success! File saved to - ${location}`)
+                resolve(`File saved to - ${location}`)
             }
         });
     });
 }
 
 Promise.all([getRandomCat(firstCatUrl), getRandomCat(secondCatUrl)]).then((cats) => {
-    combineCats(cats.map(function (cat, catIndex) {
+    combineCats(cats.map((cat, catIndex) => {
         return {
             buffer: new Buffer.from(cat, 'binary'),
             x: width * catIndex,
@@ -68,11 +69,11 @@ Promise.all([getRandomCat(firstCatUrl), getRandomCat(secondCatUrl)]).then((cats)
         writeFileToLocation(`${process.cwd()}/${config.outputPath}`, combinedFile).then(sucess => {
             console.log(sucess)
         }).catch(fileWriteError => {
-            console.error(`Error! Error occurred while writing file ${fileWriteError}`);
+            console.error(`Error occurred while writing file ${fileWriteError}`);
         })
     }).catch(combineCatError => {
-        console.error(`Error! Error occurred while combining cat files ${combineCatError}`);
+        console.error(`Error occurred while combining cat files ${combineCatError}`);
     });
 }).catch(function (catFetchError) {
-    console.error(`Error! Error occurred while fetching cat file ${catFetchError}`);
+    console.error(`Error occurred while fetching cat file ${catFetchError}`);
 });

@@ -11,6 +11,7 @@
   "dependencies": {
     "@mapbox/blend": "^2.0.1",
     "axios": "^0.21.1",
+    "console-stamp": "^3.0.3",
     "fs": "0.0.1-security",
     "minimist": "^1.2.5",
     "request": "^2.88.2"
