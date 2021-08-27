@@ -2,7 +2,7 @@ const expect = require('chai').expect;
 const catCard = require('../catCard');
 
 describe('catCard.js tests', () => {
-    describe('index.getRandomCat() Test', () => {
+    describe('catCard.getRandomCat() Test', () => {
         it('getRandomCat success', () => {
             const sampleUrl = "https://cataas.com/cat/says/Hello?width=400&height=500&colorPink&s=100";
             catCard.getRandomCat(sampleUrl).then(result => {
@@ -19,7 +19,7 @@ describe('catCard.js tests', () => {
         });
     });
 
-    describe('index.combineCats() Test', () => {
+    describe('catCard.combineCats() Test', () => {
         it('combineCats success', async () => {
             const sampleFiles = [{
                 "buffer": {

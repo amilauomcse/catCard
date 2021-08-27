@@ -5,7 +5,7 @@
   "main": "catCard.js",
   "scripts": {
     "test": "mocha",
-    "start": "node catCard.js"
+    "start": "run-func catCard.js generateCatCard"
   },
   "author": "",
   "license": "ISC",
@@ -16,7 +16,8 @@
     "console-stamp": "^3.0.3",
     "fs": "0.0.1-security",
     "minimist": "^1.2.5",
-    "request": "^2.88.2"
+    "request": "^2.88.2",
+    "run-func": "^1.0.5"
   },
   "devDependencies": {
     "mocha": "^9.1.0"
