@@ -5,16 +5,16 @@ const config = require('./config.js');
 const argv = require('minimist')(process.argv.slice(2));
 require('console-stamp')(console, 'HH:MM:ss.l]');
 const {
-    greeting = 'Hello',
-    who = 'You',
+    toby = 'Toby',
+    cody = 'Cody',
     width = 400,
     height = 500,
-    color = 'Pink',
+    color = 'White',
     size = 100,
 } = argv;
 const catCard = {};
-const firstCatUrl = `${config.api}${greeting}?width=${width}&height=${height}&color${color}&s=${size}`;
-const secondCatUrl = `${config.api}${who}?width=${width}&height=${height}&color${color}&s=${size}`;
+const firstCatUrl = `${config.api}${toby}?width=${width}&height=${height}&color=${color}&s=${size}`;
+const secondCatUrl = `${config.api}${cody}?width=${width}&height=${height}&color=${color}&s=${size}`;
 
 catCard.getRandomCat = async url => {
     try {
