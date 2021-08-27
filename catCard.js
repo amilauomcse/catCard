@@ -12,11 +12,11 @@ const {
     color = 'Pink',
     size = 100,
 } = argv;
-
+const catCard = {};
 const firstCatUrl = `${config.api}${greeting}?width=${width}&height=${height}&color${color}&s=${size}`;
 const secondCatUrl = `${config.api}${who}?width=${width}&height=${height}&color${color}&s=${size}`;
 
-const getRandomCat = async url => {
+catCard.getRandomCat = async url => {
     try {
         const response = await axios.request({
             method: 'GET',
@@ -30,7 +30,7 @@ const getRandomCat = async url => {
     }
 };
 
-const combineCats = files => {
+catCard.combineCats = files => {
     return new Promise((resolve, reject) => {
         blend(files, {
             width: width * 2,
@@ -46,7 +46,7 @@ const combineCats = files => {
     });
 }
 
-const writeFileToLocation = (location, file) => {
+catCard.writeFileToLocation = (location, file) => {
     return new Promise((resolve, reject) => {
         writeFile(location, file, 'binary', (fileWriteError) => {
             if (fileWriteError) {
@@ -58,15 +58,15 @@ const writeFileToLocation = (location, file) => {
     });
 }
 
-Promise.all([getRandomCat(firstCatUrl), getRandomCat(secondCatUrl)]).then((cats) => {
-    combineCats(cats.map((cat, catIndex) => {
+Promise.all([catCard.getRandomCat(firstCatUrl), catCard.getRandomCat(secondCatUrl)]).then((cats) => {
+    catCard.combineCats(cats.map((cat, catIndex) => {
         return {
             buffer: new Buffer.from(cat, 'binary'),
             x: width * catIndex,
             y: 0,
         }
     })).then(combinedFile => {
-        writeFileToLocation(`${process.cwd()}/${config.outputPath}`, combinedFile).then(sucess => {
+        catCard.writeFileToLocation(`${process.cwd()}/${config.outputPath}`, combinedFile).then(sucess => {
             console.log(sucess)
         }).catch(fileWriteError => {
             console.error(`Error occurred while writing file ${fileWriteError}`);
@@ -77,3 +77,6 @@ Promise.all([getRandomCat(firstCatUrl), getRandomCat(secondCatUrl)]).then((cats)
 }).catch(function (catFetchError) {
     console.error(`Error occurred while fetching cat file ${catFetchError}`);
 });
+
+
+module.exports = catCard;

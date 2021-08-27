@@ -2,18 +2,23 @@
   "name": "CatCard",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "catCard.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha",
+    "start": "node catCard.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "@mapbox/blend": "^2.0.1",
     "axios": "^0.21.1",
+    "chai": "^4.3.4",
     "console-stamp": "^3.0.3",
     "fs": "0.0.1-security",
     "minimist": "^1.2.5",
     "request": "^2.88.2"
+  },
+  "devDependencies": {
+    "mocha": "^9.1.0"
   }
 }

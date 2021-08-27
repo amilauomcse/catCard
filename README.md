@@ -17,5 +17,12 @@ npm install
 ## Running
 
 ```bash
-node index.js
+npm start
+```
+
+
+## Testing
+
+```bash
+npm test
 ```
