@@ -1,4 +1,4 @@
-
+# Cat Card
 
 # What does this project do
 
@@ -19,7 +19,10 @@ npm install
 ```bash
 npm start
 ```
-
+## Running with arguments
+```bash
+npm start -- --toby=cat1 --cody=cat2 --width=400 --height=500 --color=Black --size=200
+```
 
 ## Testing
 
