@@ -13,14 +13,15 @@ const {
     size = 100,
 } = argv;
 const catCard = {};
-const firstCatUrl = `${config.api}${toby}?width=${width}&height=${height}&color=${color}&s=${size}`;
-const secondCatUrl = `${config.api}${cody}?width=${width}&height=${height}&color=${color}&s=${size}`;
 
-catCard.getRandomCat = async url => {
+catCard.generateUrl = (name, width, height, color, size) => {
+    return `${config.api}${name}?width=${width}&height=${height}&color=${color}&s=${size}`;
+}
+catCard.getRandomCat = async (name, width, height, color, size) => {
     try {
         const response = await axios.request({
             method: 'GET',
-            url: url,
+            url: catCard.generateUrl(name, width, height, color, size),
             responseType: 'arraybuffer',
             responseEncoding: 'binary'
         });
@@ -60,7 +61,8 @@ catCard.writeFileToLocation = (location, file) => {
 
 catCard.generateCatCard = async () => {
     try {
-        const cats = await Promise.all([catCard.getRandomCat(firstCatUrl), catCard.getRandomCat(secondCatUrl)]);
+        const cats = await Promise.all([catCard.getRandomCat(toby, width, height, color, size),
+            catCard.getRandomCat(cody, width, height, color, size)]);
         const combinedCat = await catCard.combineCats(cats.map((cat, catIndex) => {
             return {
                 buffer: Buffer.from(cat, 'binary'),
