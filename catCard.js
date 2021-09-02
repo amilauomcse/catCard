@@ -58,26 +58,21 @@ catCard.writeFileToLocation = (location, file) => {
     });
 }
 
-catCard.generateCatCard = () => {
-    Promise.all([catCard.getRandomCat(firstCatUrl), catCard.getRandomCat(secondCatUrl)]).then((cats) => {
-        catCard.combineCats(cats.map((cat, catIndex) => {
+catCard.generateCatCard = async () => {
+    try {
+        const cats = await Promise.all([catCard.getRandomCat(firstCatUrl), catCard.getRandomCat(secondCatUrl)]);
+        const combinedCat = await catCard.combineCats(cats.map((cat, catIndex) => {
             return {
-                buffer: new Buffer.from(cat, 'binary'),
+                buffer: Buffer.from(cat, 'binary'),
                 x: width * catIndex,
                 y: 0,
             }
-        })).then(combinedFile => {
-            catCard.writeFileToLocation(`${process.cwd()}/${config.outputPath}`, combinedFile).then(sucess => {
-                console.log(sucess)
-            }).catch(fileWriteError => {
-                console.error(`Error occurred while writing file ${fileWriteError}`);
-            })
-        }).catch(combineCatError => {
-            console.error(`Error occurred while combining cat files ${combineCatError}`);
-        });
-    }).catch(function (catFetchError) {
-        console.error(`Error occurred while fetching cat file ${catFetchError}`);
-    });
+        }));
+        const fileLocation = await catCard.writeFileToLocation(`${process.cwd()}/${config.outputPath}`, combinedCat);
+        console.log(fileLocation);
+    } catch (error) {
+        console.error(error);
+    }
 }
 
 
